@@ -1,3 +1,23 @@
+// --- Pó ambiente: partículas de luz flutuando ao fundo ---
+function createAmbientDust(count = 38) {
+  const layer = document.createElement("div");
+  layer.className = "ambient-dust";
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement("span");
+    dot.className = "dust";
+    const size = 1 + Math.random() * 2.4;
+    dot.style.width = size + "px";
+    dot.style.height = size + "px";
+    dot.style.left = Math.random() * 100 + "vw";
+    dot.style.top = Math.random() * 100 + "vh";
+    dot.style.animationDuration = 6 + Math.random() * 8 + "s";
+    dot.style.animationDelay = -Math.random() * 12 + "s";
+    layer.appendChild(dot);
+  }
+  document.body.appendChild(layer);
+}
+createAmbientDust();
+
 // --- Lenis: scroll suave ---
 const lenis = new Lenis({
   duration: 1.4,

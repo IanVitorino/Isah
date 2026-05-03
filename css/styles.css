@@ -178,45 +178,38 @@ main {
   letter-spacing: 0.02em;
 }
 
-/* DIVIDERS */
+/* DIVIDERS — ornamento editorial em SVG */
 .divider {
-  width: 80px;
-  height: 1px;
-  background: var(--divider);
-  margin: 0 0 52px 0;
-  position: relative;
+  width: 100%;
+  max-width: 220px;
+  height: 14px;
+  background: transparent
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 14' fill='none'><line x1='0' y1='7' x2='95' y2='7' stroke='%23c9a8e8' stroke-opacity='0.32' stroke-width='1'/><path d='M110 2 L118 7 L110 12 L102 7 Z' stroke='%23c9a8e8' stroke-opacity='0.75' stroke-width='1'/><circle cx='110' cy='7' r='1.5' fill='%23edd8ff' fill-opacity='0.95'/><line x1='125' y1='7' x2='220' y2='7' stroke='%23c9a8e8' stroke-opacity='0.32' stroke-width='1'/></svg>")
+    no-repeat center / contain;
+  margin: 0 auto 56px auto;
+  border: 0;
+  position: static;
 }
 
 .divider::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  background: var(--bg);
-  border: 1px solid var(--accent);
-  border-radius: 50%;
+  display: none;
 }
 
 .divider-ornate {
   width: 100%;
+  max-width: 300px;
+  height: 18px;
+  background: transparent
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 18' fill='none'><line x1='0' y1='9' x2='110' y2='9' stroke='%23c9a8e8' stroke-opacity='0.45' stroke-width='1'/><path d='M112 9 Q 117 4, 122 9 T 132 9' stroke='%23c9a8e8' stroke-opacity='0.7' stroke-width='1' fill='none'/><path d='M150 3 L160 9 L150 15 L140 9 Z' stroke='%23edd8ff' stroke-opacity='0.85' stroke-width='1'/><circle cx='150' cy='9' r='1.6' fill='%23edd8ff' fill-opacity='0.95'/><path d='M168 9 Q 173 14, 178 9 T 188 9' stroke='%23c9a8e8' stroke-opacity='0.7' stroke-width='1' fill='none'/><line x1='190' y1='9' x2='300' y2='9' stroke='%23c9a8e8' stroke-opacity='0.45' stroke-width='1'/></svg>")
+    no-repeat center / contain;
   margin: 0 auto 64px auto;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--accent) 50%,
-    transparent 100%
-  );
-  opacity: 0.6;
+  border: 0;
+  opacity: 1;
+  position: static;
 }
 
 .divider-ornate::before {
-  width: 12px;
-  height: 12px;
-  background: var(--bg);
-  border: 1.5px solid var(--accent-strong);
+  display: none;
 }
 
 /* INTERACTIVE SECTIONS (shared) */
@@ -511,25 +504,70 @@ main {
   }
 }
 
-/* Significado simbólico do polvo */
+/* Significado simbólico do polvo — card editorial com borda em gradiente */
 .polvo-meaning {
+  position: relative;
   margin: 64px auto 0 auto;
   max-width: 480px;
-  padding: 32px 30px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(201, 168, 232, 0.22);
-  border-radius: 18px;
-  backdrop-filter: blur(2px);
+  padding: 38px 32px 34px;
+  background: linear-gradient(
+    180deg,
+    rgba(201, 168, 232, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-radius: 22px;
+  backdrop-filter: blur(3px);
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  translate: 0 14px;
+  transition: opacity 1.2s ease, translate 1.2s ease;
   text-align: center;
+  isolation: isolate;
+}
+
+/* Borda em gradiente roxo (mask trick para preservar border-radius) */
+.polvo-meaning::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(237, 216, 255, 0.55) 0%,
+    rgba(201, 168, 232, 0.12) 45%,
+    rgba(237, 216, 255, 0.55) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .polvo-meaning.visible {
   opacity: 1;
-  transform: translateY(0);
+  translate: 0 0;
+  animation: floatPolvo 7.5s ease-in-out 2s infinite;
 }
+
+@keyframes floatPolvo {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -5px; }
+}
+
+/* Polvo SVG estilizado dentro do card */
+.polvo-octopus {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px auto;
+  display: block;
+  color: var(--accent-strong);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 10px rgba(201, 168, 232, 0.45));
+}
+
 
 .polvo-meaning-title {
   font-family: var(--font-sans);
@@ -582,6 +620,236 @@ footer {
     opacity: 1;
   }
 }
+
+/* ============================================================
+   POLISH EDITORIAL — adicionado para a versão impecável
+   ============================================================ */
+
+/* Selection — combinando com a paleta */
+::selection {
+  background: rgba(201, 168, 232, 0.35);
+  color: var(--accent-strong);
+}
+
+/* Scrollbar discreta, fininha, no tom roxo */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 168, 232, 0.35) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 232, 0.25);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 168, 232, 0.45);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* Focus rings acessíveis e bonitos */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Pó ambiente — partículas de luz flutuando ao fundo */
+.ambient-dust {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-dust .dust {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(237, 216, 255, 0.7);
+  box-shadow: 0 0 6px rgba(201, 168, 232, 0.55),
+    0 0 12px rgba(201, 168, 232, 0.25);
+  animation: dustDrift 9s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes dustDrift {
+  0%, 100% {
+    opacity: 0.15;
+    transform: translateY(0) translateX(0) scale(0.85);
+  }
+  50% {
+    opacity: 0.55;
+    transform: translateY(-18px) translateX(6px) scale(1.05);
+  }
+}
+
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Numerais romanos editoriais nas mensagens */
+body {
+  counter-reset: chapter;
+}
+
+.message {
+  counter-increment: chapter;
+}
+
+.message h2::before {
+  content: counter(chapter, lower-roman) ".";
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 14px;
+  letter-spacing: 0.1em;
+  opacity: 0.78;
+}
+
+/* Ornamento delicado no hero — pequeno diamante acima de "com carinho" */
+.hero-ornament {
+  width: 30px;
+  height: 16px;
+  margin-bottom: 28px;
+  background: transparent
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 16' fill='none'><path d='M15 3 L21 8 L15 13 L9 8 Z' stroke='%23edd8ff' stroke-opacity='0.7' stroke-width='1'/><circle cx='15' cy='8' r='1.4' fill='%23edd8ff' fill-opacity='0.95'/></svg>")
+    no-repeat center / contain;
+  opacity: 0;
+  animation: fadeIn 1.2s 0.1s ease forwards;
+}
+
+/* Coração delicado no footer */
+.footer-heart {
+  display: inline-block;
+  vertical-align: middle;
+  width: 14px;
+  height: 13px;
+  margin-left: 6px;
+  color: var(--accent);
+  opacity: 0.9;
+  animation: heartBeat 3s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  10%, 30% { transform: scale(1.18); }
+  20% { transform: scale(0.96); }
+}
+
+/* Refinamento dos botões de ação (palavra, biscoito-de-novo) */
+.action-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.action-btn:hover {
+  box-shadow: 0 0 0 6px rgba(201, 168, 232, 0.06),
+    0 8px 24px rgba(124, 91, 169, 0.25);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+/* Aura pulsante em volta do biscoito */
+.cookie-btn {
+  position: relative;
+  isolation: isolate;
+}
+
+.cookie-btn::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(201, 168, 232, 0.35) 0%,
+    rgba(201, 168, 232, 0) 65%
+  );
+  z-index: -1;
+  animation: cookieAura 3.4s ease-in-out infinite;
+}
+
+@keyframes cookieAura {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.1);
+  }
+}
+
+/* Estado ativo do botão de humor — gradiente discreto */
+.mood-btn.active {
+  background: linear-gradient(
+    135deg,
+    rgba(237, 216, 255, 0.22) 0%,
+    rgba(201, 168, 232, 0.12) 100%
+  );
+  border-color: var(--accent);
+  color: var(--accent-strong);
+  box-shadow: 0 0 0 4px rgba(201, 168, 232, 0.08);
+}
+
+/* Sutil glow no display da palavra do dia */
+.word-card {
+  position: relative;
+}
+
+.word-card::before {
+  content: "";
+  position: absolute;
+  inset: 10% 10%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(201, 168, 232, 0.1) 0%,
+    transparent 70%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+.word-display:not(:empty) {
+  filter: drop-shadow(0 0 14px rgba(201, 168, 232, 0.25));
+}
+
+/* Sublinhado mais luminoso no nome do hero */
+.hero h1 .name::after {
+  background: linear-gradient(
+    90deg,
+    rgba(201, 168, 232, 0) 0%,
+    rgba(237, 216, 255, 0.55) 50%,
+    rgba(201, 168, 232, 0) 100%
+  );
+  opacity: 1;
+}
+
+/* Ornamento entre seções: melhora margens nos cards */
+.message h2 {
+  letter-spacing: 0.005em;
+}
+
+/* ============================================================ */
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
