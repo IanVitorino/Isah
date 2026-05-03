@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pra você, Isah</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <meta name="theme-color" content="#2a1b47" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="lib/aos/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">com carinho</p>
+      <h1>Pra você, <span class="name">Isah</span></h1>
+      <p class="subtitle">
+        Algumas palavras que eu queria que você lesse<br />
+        sempre que precisar.
+      </p>
+      <div class="scroll-hint" aria-hidden="true">
+        <span>role pra baixo</span>
+        <div class="arrow">↓</div>
+      </div>
+    </section>
+
+    <section class="message" data-aos="fade-up">
+      <div class="divider"></div>
+      <h2>A suavidade</h2>
+      <p>
+        Eu acho muito bonito como você passou e passa por tanta coisa e
+        consegue lidar com isso, consegue encarar a e seguir, não ignorando,
+        mas sim aceitando o que aconteceu e aprendendo com isso. É muito
+        bonito esse seu jeito, a forma que você encara esse tipo de
+        dificuldade.
+      </p>
+    </section>
+
+    <section class="message" data-aos="fade-up">
+      <div class="divider"></div>
+      <h2>O passado</h2>
+      <p>
+        Sabia que eu me importava mais com você do que com qualquer outra
+        pessoa daquele grupo quando eu te conheci? Não porque eu me identificava ou
+        algo assim, eu acho que é porque eu entendia. Eu fico feliz de saber
+        que você reconhece isso.
+      </p>
+    </section>
+
+    <section class="message" data-aos="fade-up">
+      <div class="divider"></div>
+      <h2>Arte</h2>
+      <p>
+        Você falou de arte, eu não me considero um artista. Arte para mim é
+        tudo aquilo que você consegue usar para se expressar, e eu percebo que
+        você faz isso muito bem. Achei muito fofinho o fato de que você já
+        gravou covers, é bonitinho.
+      </p>
+    </section>
+
+    <section class="message" data-aos="fade-up">
+      <div class="divider"></div>
+      <h2>Começo</h2>
+      <p>
+        Eu tinha esquecido o quão gostosinho é falar com você, eu tenho andado
+        tão ocupado ultimamente que não tinha tempo nem de ficar com a minha
+        família direito. Mas garanto pra você, esses dias me lembraram de como
+        eu me importo e me sinto bem com você. Sei, é só um pedacinho de
+        texto, mas quero que sempre que você se sinta desencorajada, mal, ou
+        algo do tipo, você volte nesse site e lembre:
+        <span class="signoff">IAN VITORINO está aqui!</span>
+      </p>
+    </section>
+
+    <!-- BISCOITO DA SORTE -->
+    <section class="interactive cookie-section" data-aos="fade-up">
+      <div class="divider"></div>
+      <h2>uma surpresinha pra você</h2>
+      <p class="interactive-intro">clica no biscoito da sorte</p>
+
+      <button class="cookie-btn" id="cookie-btn" type="button" aria-label="abrir biscoito da sorte">
+        <span class="cookie-emoji">🥠</span>
+      </button>
+
+      <div class="cookie-message" id="cookie-message" aria-live="polite"></div>
+
+      <button class="action-btn hidden" id="cookie-again" type="button">outra surpresa</button>
+    </section>
+
+    <!-- PALAVRA DE HOJE -->
+    <section class="interactive word-section" data-aos="fade-up">
+      <div class="divider"></div>
+      <h2>sua palavra de hoje</h2>
+      <p class="interactive-intro">a qualidade que te define agora</p>
+
+      <div class="word-card">
+        <div class="word-display" id="word-display">
+          <span class="word-placeholder">?</span>
+        </div>
+        <p class="word-meaning" id="word-meaning">
+          clica no botão pra descobrir
+        </p>
+      </div>
+
+      <button class="action-btn" id="word-btn" type="button">sortear palavra</button>
+    </section>
+
+    <!-- CÁPSULA DE HUMOR -->
+    <section class="interactive mood-section" data-aos="fade-up">
+      <div class="divider"></div>
+      <h2>como você tá hoje?</h2>
+      <p class="interactive-intro">
+        escolhe como tá se sentindo — deixei algo pra cada momento
+      </p>
+
+      <div class="mood-buttons">
+        <button class="mood-btn" data-mood="triste" type="button">tô triste</button>
+        <button class="mood-btn" data-mood="abraco" type="button">preciso de um abraço</button>
+        <button class="mood-btn" data-mood="ansiosa" type="button">tô ansiosa</button>
+        <button class="mood-btn" data-mood="bem" type="button">tô bem hoje</button>
+        <button class="mood-btn" data-mood="saudade" type="button">com saudade</button>
+        <button class="mood-btn" data-mood="forca" type="button">preciso de força</button>
+      </div>
+
+      <div class="mood-message empty" id="mood-message" aria-live="polite">
+        ↑ escolhe um humor aí em cima
+      </div>
+    </section>
+
+    <section class="poem" data-aos="fade-up">
+      <div class="divider divider-ornate"></div>
+      <p class="poem-eyebrow">e por fim,</p>
+      <h2>um poema pra você</h2>
+      <div id="poem-text" class="poem-body" aria-live="polite"></div>
+
+      <div class="polvo-meaning" id="polvo-meaning" aria-hidden="true">
+        <p class="polvo-meaning-title">polvo</p>
+        <p class="polvo-meaning-text">
+          mente em tantas direções quanto braços,<br />
+          que se molda à corrente sem se perder,<br />
+          que vira outra coisa sem deixar de ser,<br />
+          e habita o fundo onde poucos vão.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>com amor —</p>
+    </footer>
+  </main>
+
+  <script src="lib/lenis/lenis.min.js"></script>
+  <script src="lib/aos/aos.js"></script>
+  <script src="lib/canvas-confetti/confetti.browser.min.js"></script>
+  <script src="lib/typed/typed.umd.js"></script>
+  <script src="lib/lottie/lottie-player.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
